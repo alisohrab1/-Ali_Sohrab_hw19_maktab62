@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+<body>
+
+    <h1>Admin panel</h1>
+    <button type="button" class="btn btn-primary" id="logoutBtn">logout</button>
+
+    <h1>employees list</h1>
+    <% %>
+    <table class="table" id="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Firstname</th>
+          <th scope="col">Lastname</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Phone</th>
+          <th scope="col">edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < employees.length; i++) { %>
+
+        <tr style="cursor: pointer" id=" <%= i+1  %>">
+          <th scope="row"><%= i+1 %></th>
+          <td id="tableFirstName<%= i+1 %>"><%= employees[i].firstName %></td>
+          <td id="tableLastName<%= i+1 %>"><%= employees[i].lastName %></td>
+          <td id="tableGender<%= i+1 %>"><%= employees[i].gender %></td>
+          <td id="tablePhone<%= i+1 %>"><%= employees[i].phone %></td>
+          <td>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#modal<%= i+1  %>"
+              id="<%= employees[i].nationalId %>"
+            >
+              edit
+            </button>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+
+    <script src="/js/edit.js"></script>
+</body>
+</html>

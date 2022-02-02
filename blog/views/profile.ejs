@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>profile</h1>
+    <h1>Welcome <%= user.username %></h1>
+    <p>username : <%=user.username %></p>
+    <p>firstname : <%=user.firstName %></p>
+    <p>lastname : <%=user.lastName %></p>
+    <p>password : <%= user.password %></p>
+    <p>phone : <%= user.phone %></p>
+    <p>gender : <%= user.gender %></p>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#editModal"
+    >
+      Edit Profile
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteModal"
+    >
+      Delete Profile
+    </button>
+    <button type="button" class="btn btn-primary" id="logoutBtn">logout</button>
+
+    <hr />
+    <hr />
+    <h1>Create new article</h1>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Article Title"
+        id="articleTitle"
+      />
+      <label for="articleText">Article Text:</label>
+      <textarea class="form-control" id="articleText" rows="3"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary mt-1" id="createArticleBtn">
+      Create
+    </button>
+
+    <hr />
+    <hr />
+    <h1>List of articles</h1>
+
+    <div class="container d-flex flex-row gap-3 mt-3">
+      <% for (var i = 0; i < articles.length; i++) { %>
+      <div class="card" style="width: 18rem">
+        <img class="card-img-top" src="/img/article.jpg" alt="Card image cap" />
+        <div class="card-body">
+          <h5 class="card-title"><%= articles[i].title %></h5>
+          <p class="card-text" style="text-overflow: ellipsis; overflow: hidden;"><%= articles[i].text.slice(0,20) + "..." %></p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <!--Edit -  Modal -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              value="<%= user.username %>"
+              id="userId"
+              style="display: none"
+            />
+            <label for="username">username : </label> <br />
+            <input
+              type="text"
+              name="useraname"
+              id="username"
+              value="<%= user.username  %>"
+            />
+            <br />
+            <label for="password">password : </label> <br />
+            <input
+              type="text"
+              name="password"
+              id="password"
+              value="<%= user.password  %>"
+            />
+            <br />
+            <label for="firstname">firstname : </label> <br />
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              value="<%= user.firstName  %>"
+            />
+            <br />
+            <label for="lastname"> lastname : </label> <br />
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              value="<%= user.lastName  %>"
+            />
+            <br />
+            <label for="phone"> phone : </label> <br />
+            <input
+              type="text"
+              name="phone"
+              id="phone"
+              value="<%= user.phone  %>"
+            />
+            <br />
+            <label for="gender">select gender : </label> <br />
+            <select name="gender" id="gender">
+              <option value="male">male</option>
+              <option value="female">female</option>
+              <option value="other">Rather not say</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="editBtn"
+              data-bs-dismiss="modal"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- delete modal -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+            <button type="button" class="btn btn-danger" id="delBtn">
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/edit.js"></script>
+    <script src="/js/registerVal.js"></script>
+    <script src="/js/article.js"></script>
+  </body>
+</html>
